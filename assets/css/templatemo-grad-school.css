@@ -228,22 +228,32 @@ transition: 0.8s;
  
 }
 
+
+@media (max-width: 950px) {
+  .main-nav li:hover a,
+  .main-nav li.active a {
+    border: 2px solid transparent;
+    border-bottom: 1px solid rgba(250,250,250,0.25);
+  }
+}
+
+}
 i
 /* Basic */
 
 a {
-	color: #3CF;
+  color: #3CF;
     text-decoration: none;
 }
 
 a:hover {
-	color: #FC3;
+  color: #FC3;
     text-decoration: none;
 }
 
 ul {
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     list-style: none;
 }
 
@@ -251,7 +261,6 @@ p {
     font-size: 13px;
     line-height: 22px;
 }
-
 
 .section-heading {
     text-align: center;
@@ -281,6 +290,39 @@ p {
     border: 2px solid rgba(250,250,250,0.1);
 }
 
+/* ✅ Responsive styles */
+@media (max-width: 768px) {
+  p {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .section-heading {
+    margin-bottom: 10px;
+  }
+
+  .section-heading h2 {
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+
+  .section-heading h2:before {
+    height: 60px;
+    top: -62px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-heading h2 {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  p {
+    font-size: 13px;
+  }
+}
+
 
 /* Buttons */
 
@@ -296,8 +338,12 @@ p {
     outline: none;
 }
 
-a.menu-link { display: none; }
+/* زر القائمة يظهر فقط في الشاشات الصغيرة */
+a.menu-link {
+    display: none;
+}
 
+/* ✅ Responsive Navigation */
 @media screen and (max-width: 950px) {
   a.menu-link {
     float: right;
@@ -307,35 +353,36 @@ a.menu-link { display: none; }
     padding-right: 30px;
     padding-top: 15px;
   }
+
   nav[role="navigation"] {
     clear: both;
-    -webkit-transition: all 0.3s ease-out;
-    -moz-transition: all 0.3s ease-out;
-    -ms-transition: all 0.3s ease-out;
-    -o-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
   }
+
   .js nav[role="navigation"] {
     overflow: hidden;
     max-height: 0;
   }
+
   nav[role="navigation"].active {
     max-height: 20em;
     height: 20em;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
+
   nav[role="navigation"] ul {
-    top: 0;
     width: 100%;
-    position: relative;
     margin: 0;
     padding: 0;
+    position: relative;
+    top: 0;
     border-top: 1px solid rgba(250,250,250,0.25);
     background-color: rgba(22,34,57,0.99);
   }
+
   nav[role="navigation"] li a {
     display: block;
-    padding: 15px 0px;
+    padding: 15px 0;
     border-bottom: 1px solid rgba(250,250,250,0.25);
     text-align: center;
     color: #fff;
@@ -344,39 +391,53 @@ a.menu-link { display: none; }
     font-weight: 700;
     line-height: 1.5;
   }
+
   nav[role="navigation"] li:hover a,
   nav[role="navigation"] li.active a {
-      color: #e2722a;
-  }
-  
-  @media screen and (min-width: 951px) {
-    .js nav[role="navigation"] {
-      max-height: none;
-    }
-
-    nav[role="navigation"] li {
-      display: inline-block;
-      margin: 0 0.25em;
-    }
-    nav[role="navigation"] li a {
-      border: 0;
-    }
+    color: #e2722a;
   }
 }
+
+/* ✅ Desktop Navigation */
+@media screen and (min-width: 951px) {
+  .js nav[role="navigation"] {
+    max-height: none;
+  }
+
+  nav[role="navigation"] li {
+    display: inline-block;
+    margin: 0 0.25em;
+  }
+
+  nav[role="navigation"] li a {
+    border: 0;
+  }
+}
+
 
 /* Header */
 
 @media screen and (max-width: 1050px) {
   .main-header .logo {
-      padding-left: 30px!important;
+      padding-left: 20px!important;
+      line-height: 60px;
   }
 
   .main-menu {
-      padding-right: 30px!important;
+      padding-right: 20px!important;
   }
 
   .main-menu li {
       margin-left: 5px!important;
+  }
+
+  .main-header {
+    height: 60px;
+  }
+
+  a.menu-link {
+    padding-right: 20px;
+    padding-top: 10px;
   }
 }
 
@@ -501,6 +562,85 @@ a.menu-link { display: none; }
     border-bottom: 1px solid rgba(250,250,250,0.25);
   }
 }
+/* Responsive rules for smaller devices */
+@media screen and (max-width: 768px) {
+  .main-header {
+    height: auto;
+    padding: 10px 20px;
+    text-align: center;
+  }
+
+  .main-header .logo {
+    float: none;
+    padding: 0;
+    line-height: normal;
+  }
+
+  .main-header .logo a {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .main-menu {
+    float: none;
+    padding: 0;
+    margin-top: 10px;
+    display: none;
+  }
+
+  .main-menu.active {
+    display: block;
+  }
+
+  .main-menu li {
+    display: block;
+    margin: 10px 0;
+    line-height: 1.5;
+  }
+
+  .main-button a {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Adjust submenus */
+  .main-menu li .sub-menu {
+    position: relative;
+    width: 100%;
+    background-color: #2d2e31;
+    opacity: 1;
+    visibility: visible;
+    display: none;
+  }
+
+  .main-menu li:hover .sub-menu {
+    display: block;
+  }
+
+  .main-menu li .sub-menu li {
+    border: none;
+    margin: 5px 0;
+    padding: 5px 10px;
+  }
+}
+
+/* Even smaller screens (phones < 480px) */
+@media screen and (max-width: 480px) {
+  .main-header .logo a {
+    font-size: 22px;
+  }
+
+  .main-button a {
+    font-size: 12px;
+    padding: 10px 15px;
+  }
+
+  nav[role="navigation"] li a {
+    font-size: 12px;
+  }
+}
+
 
 
 /* Slider */
@@ -513,25 +653,25 @@ a.menu-link { display: none; }
 }
 
 #bg-video {
-    min-width: 100%;
-    min-height: 100vh;
-    max-width: 100%;
-    max-height: 100vh;
-    object-fit: cover;
-    z-index: -1;
+  min-width: 100%;
+  min-height: 100vh;
+  max-width: 100%;
+  max-height: 100vh;
+  object-fit: cover;
+  z-index: -1;
 }
 
 #bg-video::-webkit-media-controls {
-    display: none !important;
+  display: none !important;
 }
 
 .video-overlay {
-    position: absolute;
-    background-color: rgba(22,34,57,0.85);
-    top: 0;
-    left: 0;
-    bottom: 7px;
-    width: 100%;
+  position: absolute;
+  background-color: rgba(22,34,57,0.85);
+  top: 0;
+  left: 0;
+  bottom: 7px;
+  width: 100%;
 }
 
 .main-banner .caption {
@@ -540,7 +680,7 @@ a.menu-link { display: none; }
   width: 80%;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 
 .main-banner .caption h6 {
@@ -568,8 +708,8 @@ a.menu-link { display: none; }
   font-weight: 900;
 }
 
+/* Adjustments for medium screens */
 @media screen and (max-width: 1180px) {
-
   .main-banner .caption h6 {
     font-weight: 500;
   }
@@ -577,18 +717,41 @@ a.menu-link { display: none; }
   .main-banner .caption h2 {
     font-size: 58px;
   }
-
 }
-@media screen and (max-width: 767px) {
 
+/* Adjustments for tablets and small laptops */
+@media screen and (max-width: 767px) {
+  .main-banner .caption {
+    width: 90%;
+  }
   .main-banner .caption h6 {
     font-weight: 500;
+    font-size: 16px;
   }
 
   .main-banner .caption h2 {
     font-size: 36px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+/* For small phones */
+@media screen and (max-width: 480px) {
+  .main-banner .caption {
+    width: 95%;
+    padding: 0 10px;
+  }
+  .main-banner .caption h6 {
+    font-size: 14px;
   }
 
+  .main-banner .caption h2 {
+    font-size: 24px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+  }
 }
 
 
@@ -611,6 +774,8 @@ section.features .col-4 {
 
 .features-thumb img {
   width: 100%;
+  display: block;
+  height: auto;
 }
 
 .features-content {
@@ -621,6 +786,7 @@ section.features .col-4 {
   background-color: #162238;
   color: #fff;
   padding: 30px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .features-content:hover {
@@ -675,31 +841,51 @@ section.features .col-4 {
   color: #fff;
 }
 
+/* تعديل للموبايل */
 @media screen and (max-width: 767px) {
 
-  .features-content {
-    padding: 15px;
+  section.features .col-4 {
+    width: 100%; /* كل عنصر ياخد العرض كامل */
+    padding-left: 15px; /* شوية padding من الجوانب */
+    padding-right: 15px;
+    margin-bottom: 20px; /* مسافة بين العناصر */
   }
+
+  .features-content {
+    position: relative; /* باش يكون متدفق مع المحتوى مش absolute */
+    padding: 15px;
+    background-color: #162238;
+  }
+
   .features-content h4 i {
     display: block;
     margin-bottom: 10px;
   }
+
   .features-content h4 {
     font-size: 14px;
   }
+
   .features-content p {
     display: none;
   }
+
   .features-content p.hidden-sm {
     display: block;
   }
+
   .features-content a {
     letter-spacing: 0px;
     font-size: 13px;
     font-weight: 600;
   }
 
+  .second-features,
+  .third-features {
+      border-left: none; /* نحيد الحدود الجانبية على الموبايل */
+  }
 }
+
 
 
 
@@ -750,6 +936,7 @@ section.why-us {
   text-decoration: none;
   text-transform: uppercase;
   position: relative;
+  text-align: center;
 }
 #tabs ul li a:after {
     transition: all 0.3s;
@@ -832,6 +1019,15 @@ section.why-us {
   }
 
 }
+@media screen and (max-width: 767px) {
+  #tabs ul {
+    -webkit-column-count: 3 !important;
+    -moz-column-count: 3 !important;
+    column-count: 3 !important;
+    padding: 0 15px;
+  }
+}
+
 
 
 /* Coming Soon */
@@ -1022,6 +1218,7 @@ section.courses {
 section.courses .item img {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
+
 }
 
 section.courses .item .down-content {
@@ -1053,7 +1250,8 @@ section.courses .item .down-content img {
     display: inline-block;
 }
 
-section.courses .item .down-content .text-button-pay {
+section.courses .item .down-content .text-button-pay,
+section.courses .item .down-content .text-button-free {
     float: right;
     display: inline-block;
     margin-top: -30px;
@@ -1062,12 +1260,6 @@ section.courses .item .down-content .text-button-pay {
 section.courses .item .down-content .text-button-pay a {
     color: #e2722a;
     font-size: 13px;
-}
-
-section.courses .item .down-content .text-button-free {
-    float: right;
-    display: inline-block;
-    margin-top: -30px;
 }
 
 section.courses .item .down-content .text-button-free a {
@@ -1090,8 +1282,38 @@ section.courses .owl-carousel button.owl-dot {
     margin: 50px 10px 0px 10px;
     outline: none;
 }
+
 section.courses .owl-carousel button.active {
     background-color: #e2722a;
+}
+
+/* Responsive for mobile */
+@media screen and (max-width: 767px) {
+  section.courses {
+    padding: 20px 15px 50px 15px;
+  }
+  section.courses .item {
+    display: block;
+    margin-bottom: 30px;
+  }
+  section.courses .item img {
+    width: 100%;
+    height: auto;
+  }
+  section.courses .item .down-content {
+    padding: 20px;
+    text-align: center;
+  }
+  section.courses .item .down-content img {
+    display: block;
+    margin: 0 auto 15px auto;
+  }
+  section.courses .item .down-content .text-button-pay,
+  section.courses .item .down-content .text-button-free {
+    float: none;
+    margin-top: 10px;
+    display: inline-block;
+  }
 }
 
 
@@ -1658,6 +1880,45 @@ img.mfp-img {
     padding-right: 6px;
   }
 }
+@media screen and (max-width: 767px) {
+  section.video {
+    padding: 60px 15px; /* تقليل البادينغ */
+  }
+
+  section.video .left-content h4 {
+    font-size: 22px; /* تصغير العنوان */
+    line-height: 30px;
+    text-align: center;
+  }
+
+  .video-item {
+    max-width: 100%; /* يعمّر العرض كاملا */
+  }
+
+  .video-item figure img {
+    width: 100%; /* يصغر الصورة مع الحفاظ على النسبة */
+  }
+
+  .video-item figure a:before,
+  .video-item figure a:after {
+    right: 10px; /* نقل زر التشغيل لتناسب الشاشة الصغيرة */
+    bottom: 10px;
+  }
+
+  .video-item .video-caption {
+    width: 100%;
+    padding: 15px 20px;
+    height: auto;
+    position: relative;
+  }
+
+  .video-item .video-caption h4 {
+    position: relative;
+    bottom: auto;
+    letter-spacing: normal;
+    font-size: 14px;
+  }
+}
 
 
 
@@ -1669,48 +1930,43 @@ section.contact {
     background-size: cover;
     background-color: #172238;
     padding-bottom: 120px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
-
 
 section.contact form {
     background-color: rgba(250,250,250,0.1);
     padding: 30px;
     width: 100%;
+    max-width: 600px; /* تحديد عرض أقصى للفورم */
+    margin: 0 auto; /* توسيط الفورم */
+    box-sizing: border-box;
 }
 
-
-@media screen and (max-width: 767px) {  
-  section.contact form {
-      margin-bottom: 30px;
-  }
+section.contact form input,
+section.contact form textarea {
+    width: 100%;
+    background-color: rgba(250,250,250,0.1);
+    border-radius: 0px;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 13px;
+    margin-bottom: 30px;
+    letter-spacing: 0.5px;
+    padding: 10px; /* إضافة حشوة داخلية لتحسين اللمس */
+    box-sizing: border-box;
 }
 
 section.contact form input {
-    width: 100%;
     height: 40px;
-    background-color: rgba(250,250,250,0.1);
-    border-radius: 0px;
-    border: none;
-    outline: none;
-    color: #fff;
-    font-size: 13px;
-    margin-bottom: 30px;
-    letter-spacing: 0.5px;
 }
 
 section.contact form textarea {
-    width: 100%;
     height: 220px;
     max-height: 280px;
     min-height: 220px;
-    background-color: rgba(250,250,250,0.1);
-    border-radius: 0px;
-    border: none;
-    outline: none;
-    color: #fff;
-    font-size: 13px;
-    margin-bottom: 30px;
-    letter-spacing: 0.5px;
+    resize: vertical; /* يمكن التحكم في تغيير الحجم عموديا فقط */
 }
 
 section.contact form input:focus,
@@ -1722,13 +1978,11 @@ section.contact form textarea:focus {
     background-color: rgba(250,250,250,0.1);
 }
 
-section.contact form::placeholder { color: #fff }
-section.contact form input::placeholder { color: #fff; }
-section.contact form input::placeholder { color: #fff; }
-
-section.contact form::placeholder { color: #fff }
-section.contact form textarea::placeholder { color: #fff; }
-section.contact form textarea::placeholder { color: #fff; }
+section.contact form::placeholder,
+section.contact form input::placeholder,
+section.contact form textarea::placeholder {
+    color: #fff;
+}
 
 section.contact form button {
     background-color: #e2722a;
@@ -1742,7 +1996,38 @@ section.contact form button {
     outline: none;
     box-shadow: none;
     border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
+
+section.contact form button:hover {
+    background-color: #cf621e;
+}
+
+/* الميديا كويري للشاشات الصغيرة */
+@media screen and (max-width: 767px) {
+    section.contact {
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 60px;
+    }
+    section.contact form {
+        padding: 20px;
+        max-width: 100%;
+    }
+    section.contact form input,
+    section.contact form textarea {
+        margin-bottom: 20px;
+        font-size: 14px;
+        padding: 12px;
+    }
+    section.contact form button {
+        width: 100%;
+        font-size: 15px;
+        padding: 15px 0;
+    }
+}
+
 
 /* Footer */
 
