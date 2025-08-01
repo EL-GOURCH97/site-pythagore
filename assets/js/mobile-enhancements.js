@@ -880,5 +880,80 @@ $(document).ready(function() {
         enhanceVideoSection();
     }
 
+    // Video background fix - MOBILE ONLY
+    function fixVideoBackground() {
+        // Only apply on mobile devices
+        if (window.innerWidth > 768) {
+            return; // Exit if not mobile
+        }
+
+        const bgVideo = document.getElementById('bg-video');
+        if (!bgVideo) return;
+
+        console.log('🎥 Fixing video background for mobile');
+
+        // Ensure video attributes are set correctly
+        bgVideo.setAttribute('playsinline', '');
+        bgVideo.setAttribute('muted', '');
+        bgVideo.setAttribute('autoplay', '');
+        bgVideo.setAttribute('loop', '');
+        bgVideo.setAttribute('preload', 'auto');
+
+        // Force video to be visible
+        bgVideo.style.cssText = `
+            object-fit: cover !important;
+            width: 100% !important;
+            height: 100% !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            z-index: -1 !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        `;
+
+        // Try to play the video
+        const playPromise = bgVideo.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log('✅ Video playing successfully');
+            }).catch(error => {
+                console.log('⚠️ Video autoplay failed:', error);
+                // Try to play on user interaction
+                document.addEventListener('touchstart', function() {
+                    bgVideo.play().catch(e => console.log('Still cannot play:', e));
+                }, { once: true });
+            });
+        }
+    }
+
+    // Initialize all enhancements when DOM is loaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            enhanceServicesSection();
+            enhanceVideoSection();
+            fixVideoBackground();
+        });
+    } else {
+        enhanceServicesSection();
+        enhanceVideoSection();
+        fixVideoBackground();
+    }
+
+    // Also initialize if jQuery is ready
+    if (typeof $ !== 'undefined') {
+        $(document).ready(function() {
+            enhanceServicesSection();
+            enhanceVideoSection();
+            fixVideoBackground();
+        });
+    } else {
+        enhanceServicesSection();
+        enhanceVideoSection();
+        fixVideoBackground();
+        console.log('✅ All enhancements initialized');
+    }
+
 
 }); 

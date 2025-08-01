@@ -17,7 +17,7 @@ body.menu-open {
   /* Typography adjustments */
   body {
     font-size: 14px;
-    line-height: 1.4;
+    line-height: 1.6;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -33,7 +33,13 @@ body.menu-open {
   /* Header mobile optimizations */
   .main-header {
     padding: 10px 0;
-    position: relative;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    background: rgba(12, 18, 40, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,14 +48,16 @@ body.menu-open {
   
   .main-header .logo {
     font-size: 18px;
-    text-align: left !important;
-    padding-left: 20px !important;
+    text-align: center !important;
+    padding-left: 0 !important;
     flex: 1;
+    justify-content: center;
+    display: flex;
   }
   
   .main-header .logo a {
     padding: 5px 10px;
-    text-align: left !important;
+    text-align: center !important;
     display: block;
   }
   
@@ -123,7 +131,10 @@ body.menu-open {
   /* Menu toggle button */
   a.menu-link {
     display: block !important;
-    position: relative;
+    position: absolute !important;
+    right: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
     z-index: 10000;
     background: rgba(12, 18, 40, 0.9) !important;
     border: 2px solid #fff !important;
@@ -131,12 +142,8 @@ body.menu-open {
     font-size: 18px;
     padding: 8px 12px !important;
     border-radius: 5px;
-    cursor: pointer !important;
     text-decoration: none;
     transition: all 0.3s ease;
-    min-width: 40px;
-    text-align: center;
-    margin-right: 20px;
   }
   
   a.menu-link:hover {
@@ -156,8 +163,8 @@ body.menu-open {
   }
   
   .main-banner .caption img {
-    width: 200px;
-    height: 200px;
+    width: 350px;
+    height: 350px;
     margin-bottom: 20px;
   }
   
@@ -319,27 +326,393 @@ body.menu-open {
   }
   
   #tabs ul {
-    flex-direction: column;
     margin-bottom: 30px;
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    list-style: none !important;
+    list-style-type: none !important;
+    margin: 0 0 30px 0 !important;
+    text-align: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
   
   #tabs ul li {
-    margin: 5px 0;
+    margin: 8px 0;
+    list-style: none !important;
+    list-style-type: none !important;
+    list-style-image: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: auto !important;
+    min-height: 50px !important;
   }
   
   #tabs ul li a {
-    padding: 12px 20px;
+    padding: 15px 25px;
     font-size: 16px;
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border: 2px solid rgba(245, 166, 35, 0.3);
+    border-radius: 12px;
+    color: #fff;
+    text-decoration: none;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    height: 100% !important;
+    min-height: 50px !important;
+    line-height: 1.2 !important;
+  }
+  
+  #tabs ul li::before,
+  #tabs ul li::after {
+    display: none !important;
+    content: none !important;
+  }
+  
+  #tabs ul::before,
+  #tabs ul::after {
+    display: none !important;
+    content: none !important;
+  }
+  
+  /* Suppression complète de tous les indicateurs de liste */
+  #tabs * {
+    list-style: none !important;
+    list-style-type: none !important;
+    list-style-image: none !important;
+  }
+  
+  #tabs ul li * {
+    list-style: none !important;
+    list-style-type: none !important;
+    list-style-image: none !important;
+  }
+  
+  /* Suppression spécifique des indicateurs sous les onglets */
+  #tabs ul li {
+    position: relative;
+  }
+  
+  #tabs ul li::marker {
+    display: none !important;
+    content: none !important;
+    font-size: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  
+  #tabs ul li::before {
+    display: none !important;
+    content: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Suppression des puces par défaut du navigateur */
+  #tabs ul {
+    -webkit-padding-start: 0 !important;
+    -moz-padding-start: 0 !important;
+    padding-inline-start: 0 !important;
+  }
+  
+  #tabs ul li {
+    -webkit-padding-start: 0 !important;
+    -moz-padding-start: 0 !important;
+    padding-inline-start: 0 !important;
+    text-indent: 0 !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: auto !important;
+    min-height: 50px !important;
+    vertical-align: middle !important;
+  }
+  
+  /* Suppression complète des puces pour tous les navigateurs */
+  #tabs ul {
+    counter-reset: none !important;
+  }
+  
+  #tabs ul li {
+    counter-increment: none !important;
+  }
+  
+  /* Règle spécifique pour Safari et WebKit */
+  #tabs ul li {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+  }
+  
+  /* Suppression complète des indicateurs de navigation sous les onglets */
+  #tabs .ui-tabs-nav,
+  #tabs .ui-tabs-nav li,
+  #tabs .ui-tabs-nav li a {
+    list-style: none !important;
+    list-style-type: none !important;
+    list-style-image: none !important;
+  }
+  
+  /* Suppression des indicateurs de navigation jQuery UI */
+  #tabs .ui-tabs-nav li::before,
+  #tabs .ui-tabs-nav li::after,
+  #tabs .ui-tabs-nav li a::before,
+  #tabs .ui-tabs-nav li a::after {
+    display: none !important;
+    content: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Suppression des marqueurs de navigation */
+  #tabs .ui-tabs-nav li::marker {
+    display: none !important;
+    content: none !important;
+  }
+  
+  /* Suppression des indicateurs de navigation par défaut */
+  #tabs .ui-tabs-nav li {
+    background: none !important;
+    background-image: none !important;
+  }
+  
+  /* Suppression de tous les éléments de navigation jQuery UI */
+  #tabs .ui-tabs-nav,
+  #tabs .ui-tabs-nav li,
+  #tabs .ui-tabs-nav li a,
+  #tabs .ui-tabs-nav li span {
+    position: relative;
+  }
+  
+  #tabs .ui-tabs-nav li::before,
+  #tabs .ui-tabs-nav li::after,
+  #tabs .ui-tabs-nav li a::before,
+  #tabs .ui-tabs-nav li a::after,
+  #tabs .ui-tabs-nav li span::before,
+  #tabs .ui-tabs-nav li span::after {
+    display: none !important;
+    content: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    background-image: none !important;
+  }
+  
+  /* Suppression des indicateurs de navigation globaux */
+  #tabs *::before,
+  #tabs *::after {
+    content: none !important;
+  }
+  
+  #tabs ul li a::before {
+    content: '' !important;
+  }
+  
+  #tabs ul li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(245, 166, 35, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  #tabs ul li a:hover::before {
+    left: 100%;
+  }
+  
+  #tabs ul li a:hover {
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+    border-color: rgba(245, 166, 35, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(245, 166, 35, 0.3);
+  }
+  
+  #tabs ul li a.active {
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.4) 0%, rgba(255, 255, 255, 0.15) 100%);
+    border-color: #f5a623;
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(245, 166, 35, 0.4);
   }
   
   .tabs-content {
-    padding: 20px 0;
+    padding: 25px 0;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 20px;
   }
   
   .tabs-content img {
     width: 100%;
     height: auto;
     margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .tabs-content img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .tabs-content h4 {
+    color: #f5a623;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  .tabs-content h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #f5a623 0%, #f39c12 100%);
+    border-radius: 2px;
+  }
+  
+  .tabs-content p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+    font-size: 14px;
+    text-align: justify;
+    padding: 0 15px;
+  }
+
+  /* Animation d'entrée pour les articles */
+  .tabs-content article {
+    animation: slideInUp 0.6s ease-out;
+    position: relative;
+  }
+  
+  .tabs-content article::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #f5a623 0%, #f39c12 100%);
+    border-radius: 0 0 15px 15px;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  
+  .tabs-content article.active::before {
+    transform: scaleX(1);
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes tabPulse {
+    0% {
+      box-shadow: 0 6px 20px rgba(245, 166, 35, 0.4);
+    }
+    50% {
+      box-shadow: 0 6px 20px rgba(245, 166, 35, 0.6);
+    }
+    100% {
+      box-shadow: 0 6px 20px rgba(245, 166, 35, 0.4);
+    }
+  }
+  
+  #tabs ul li a.active {
+    animation: tabPulse 2s infinite;
+  }
+  
+  /* Correction spécifique de l'alignement des onglets */
+  #tabs ul li {
+    display: inline-block !important;
+    margin: 0 5px !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: 50px !important;
+    width: calc(50% - 10px) !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+  }
+  
+  #tabs ul li a {
+    display: inline-block !important;
+    height: 100% !important;
+    min-height: 50px !important;
+    margin: 0 !important;
+    padding: 10px 20px !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+    font-size: 13px !important;
+    text-align: center !important;
+    line-height: 30px !important;
+    vertical-align: middle !important;
+    width: 100% !important;
+    min-width: 120px !important;
+  }
+  
+  /* Force l'affichage sur une seule ligne */
+  #tabs ul {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+  }
+  
+  #tabs ul li {
+    flex-shrink: 0 !important;
+    flex-grow: 1 !important;
+    flex-basis: 0 !important;
+  }
+
+  /* Effet de focus pour l'accessibilité */
+  #tabs ul li a:focus {
+    outline: 3px solid rgba(245, 166, 35, 0.5);
+    outline-offset: 2px;
+  }
+
+  .tabs-content article:focus-within {
+    outline: 3px solid rgba(245, 166, 35, 0.3);
+    outline-offset: 3px;
   }
   
   /* Hexagonal gallery mobile */
@@ -487,6 +860,27 @@ body.menu-open {
   footer p {
     font-size: 14px;
   }
+  
+  /* Icônes réseaux sociaux - Mobile */
+  footer p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .social-icons {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+  
+  .social-icon {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    margin: 0 5px;
+  }
 }
 
 /* Small mobile devices */
@@ -500,8 +894,8 @@ body.menu-open {
   }
   
   .main-banner .caption img {
-    width: 150px;
-    height: 150px;
+    width: 280px;
+    height: 280px;
   }
   
   .section-heading h2 {
@@ -550,8 +944,8 @@ body.menu-open {
   }
   
   .main-banner .caption img {
-    width: 120px;
-    height: 120px;
+    width: 240px;
+    height: 240px;
   }
   
   .main-header .logo {
@@ -808,6 +1202,36 @@ img.loaded {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     background: #fff;
   }
+  
+  /* Désactiver les liens dans la section courses */
+  section.courses .item a,
+  section.courses .item a:hover,
+  section.courses .item a:focus,
+  section.courses .item a:visited,
+  section.courses a,
+  section.courses .item * a {
+    pointer-events: none !important;
+    cursor: default !important;
+    text-decoration: none !important;
+    color: inherit !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+  }
+  
+  /* Désactiver complètement la section courses */
+  section.courses {
+    pointer-events: none !important;
+  }
+  
+  section.courses .item {
+    pointer-events: none !important;
+  }
+  
+  section.courses .item * {
+    pointer-events: none !important;
+  }
 
   section.courses .item.animate {
     transform: translateY(0);
@@ -815,9 +1239,13 @@ img.loaded {
   }
 
   /* Effet hover sur les cartes mobile */
-  section.courses .item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(245, 166, 35, 0.2);
+  section.courses .item:hover,
+  section.courses .item:focus,
+  section.courses .item:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    cursor: default !important;
+    pointer-events: none !important;
   }
 
   /* Amélioration des images mobile */
@@ -829,8 +1257,11 @@ img.loaded {
     border-radius: 12px 12px 0 0;
   }
 
-  section.courses .item:hover img {
-    transform: scale(1.03);
+  section.courses .item:hover img,
+  section.courses .item:focus img,
+  section.courses .item:active img {
+    transform: scale(1) !important;
+    pointer-events: none !important;
   }
 
   /* Amélioration du contenu mobile */
@@ -1262,8 +1693,47 @@ img.loaded {
   @keyframes spin {
     to { transform: rotate(360deg); }
   }
+}
 
-
-} 
-
- 
+/* Lightbox personnalisée - MOBILE SEULEMENT */
+@media screen and (max-width: 768px) {
+  .custom-lightbox-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.9) !important;
+    z-index: 9998 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+  }
+  
+  .custom-lightbox-image {
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .custom-lightbox-image img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    border-radius: 8px !important;
+    display: block !important;
+  }
+  
+  /* Cacher la lightbox personnalisée sur PC */
+  @media screen and (min-width: 769px) {
+    .custom-lightbox-overlay {
+      display: none !important;
+    }
+  }
+}
