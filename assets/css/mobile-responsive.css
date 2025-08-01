@@ -48,16 +48,16 @@ body.menu-open {
   
   .main-header .logo {
     font-size: 18px;
-    text-align: center !important;
-    padding-left: 0 !important;
+    text-align: left !important;
+    padding-left: 20px !important;
     flex: 1;
-    justify-content: center;
+    justify-content: flex-start;
     display: flex;
   }
   
   .main-header .logo a {
     padding: 5px 10px;
-    text-align: center !important;
+    text-align: left !important;
     display: block;
   }
   
@@ -913,12 +913,12 @@ body.menu-open {
   .courses .item .down-content h4 {
     font-size: 16px;
   }
- .section.courses .owl-carousel .item img {
-    width: 412px !important;
-    height: 412px !important;
-    margin: 0 auto;
-    display: block;
-  }
+               .section.courses .owl-carousel .item img {
+            width: 412px !important;
+            height: 412px !important;
+            margin: 0 auto;
+            display: block;
+        }
 
   .video .left-content h4 {
     font-size: 18px;
