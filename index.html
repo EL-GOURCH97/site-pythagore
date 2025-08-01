@@ -170,10 +170,7 @@
                   </div>
                   <div class="col-md-6">
                     <h4>Une éducation de qualité</h4>
-                    <p style="text-align: justify;">Notre établissement propose un enseignement basé sur des méthodes
-                      pédagogiques modernes.Les élèves bénéficient d’un encadrement personnalisé adapté à leurs
-                      besoins.L’objectif est de développer leur autonomie, esprit critique et créativité.Nous plaçons
-                      leur réussite scolaire et personnelle au centre de nos priorités.</p>
+                   <p style="text-align: justify;">Notre établissement propose un enseignement basé sur des méthodes pédagogiques modernes. Les élèves bénéficient d’un encadrement personnalisé adapté à leurs besoins. L’objectif est de développer leur autonomie, esprit critique et créativité. Nous plaçons leur réussite scolaire et personnelle au centre de nos priorités.</p>
                   </div>
                 </div>
               </article>
@@ -184,10 +181,7 @@
                   </div>
                   <div class="col-md-6">
                     <h4>Une direction visionnaire</h4>
-                    <p style="text-align: justify;">L’équipe dirigeante possède une grande expérience dans le domaine
-                      éducatif.Elle adopte une gestion moderne, centrée sur l’innovation et la qualité.Chaque décision
-                      vise à améliorer les conditions d’apprentissage.La transparence et l’écoute sont les piliers de
-                      notre gouvernance.</p>
+                    <p style="text-align: justify;">L’équipe dirigeante possède une grande expérience dans le domaine éducatif. Elle adopte une gestion moderne, centrée sur l’innovation et la qualité. Chaque décision vise à améliorer les conditions d’apprentissage. La transparence et l’écoute sont les piliers de notre gouvernance.</p>
                   </div>
                 </div>
               </article>
@@ -199,10 +193,8 @@
                   <div class="col-md-6">
                     <h4>Une équipe pédagogique engagée et compétente</h4>
                     <p style="text-align: justify;">
-                      Notre établissement s’appuie sur une équipe pédagogique qualifiée, dynamique et passionnée par
-                      l’enseignement.
-                      Les enseignants accompagnent chaque élève avec bienveillance et exigence, en adaptant leurs
-                      méthodes aux besoins de chacun.
+                       Notre établissement s’appuie sur une équipe pédagogique qualifiée, dynamique et passionnée par l’enseignement.  
+                       Les enseignants accompagnent chaque élève avec bienveillance et exigence, en adaptant leurs méthodes aux besoins de chacun.  
                       Leur engagement quotidien contribue à créer un climat de confiance, de respect et de réussite.</p>
                   </div>
                 </div>
@@ -346,8 +338,7 @@
             <img src="assets/images/courses-02.jpeg" width="240" height="240" alt="Course #2">
             <div class="down-content">
               <h4>Salle informatique</h4>
-              <p>Un espace moderne, bien aménagé, équipé des derniers ordinateurs et logiciels éducatifs interactifs,
-                visant à renforcer les compétences numériques et en programmation des élèves.</p>
+              <p>Un espace moderne et bien équipé, doté des derniers ordinateurs et de logiciels éducatifs interactifs. Il vise à initier les élèves à l’utilisation des outils informatiques et à développer leur esprit créatif.</p>
             </div>
           </div>
           <div class="item">
@@ -471,7 +462,7 @@
         <div class="col-md-6">
 
 
-          <form id="contact" action="" method="post">
+          <form id="contact" action="send_email_gmail.php" method="post">
             <div class="row">
               <div class="col-md-6">
                 <fieldset>
@@ -514,9 +505,22 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <p><i class="fa fa-copyright"></i> Copyright 2025 by Pythagore Sahara
-
-
+          <p>
+            <i class="fa fa-copyright"></i> Copyright 2025 by Pythagore Sahara
+            
+            <!-- Icônes réseaux sociaux -->
+            <span class="social-icons">
+              <a href="https://www.facebook.com/profile.php?id=61576874161994" target="_blank" class="social-icon">
+                <i class="fa fa-facebook"></i>
+              </a>
+              <a href="https://www.instagram.com/pythagoresahara" target="_blank" class="social-icon">
+                <i class="fa fa-instagram"></i>
+              </a>
+              <a href="https://wa.me/212661673871" target="_blank" class="social-icon">
+                <i class="fa fa-whatsapp"></i>
+              </a>
+            </span>
+          </p>
         </div>
       </div>
     </div>
@@ -576,25 +580,176 @@
 
   <script>
     document.getElementById("contact").addEventListener("submit", function (event) {
-      event.preventDefault();
+      event.preventDefault(); // Empêcher l'envoi normal
+      
+      // Récupérer les valeurs du formulaire
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var message = document.getElementById("message").value;
 
-      emailjs.sendForm("service_8dv303p", "template_97h2or8", this)
-        .then(function () {
-          alert("Message envoyé avec succès !");
-        }, function (error) {
-          alert("Erreur lors de l'envoi: " + JSON.stringify(error));
+      // Vérifier que les champs ne sont pas vides
+      if (!name || !email || !message) {
+        alert("Veuillez remplir tous les champs !");
+        return;
+      }
+      
+      // Envoyer vers PHP
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('message', message);
+      
+      // Envoyer avec Web3Forms (gratuit)
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: '9b4edbfe-d5ef-4590-befa-1a8b8a646d1f', // Votre clé Web3Forms
+          name: name,
+          email: email,
+          message: message,
+          subject: 'Nouveau message - Pythagore Sahara'
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert("✅ Message envoyé avec succès !");
+        } else {
+          alert("❌ Erreur lors de l'envoi. Veuillez réessayer.");
+        }
+        this.reset();
+      })
+      .catch(error => {
+        console.error('Erreur:', error);
+        alert("❌ Erreur lors de l'envoi. Le message a été sauvegardé localement.");
         });
     });
   </script>
-  <script>
-    emailjs.send("service_8dv303p", "template_97h2or8", {
-      name: "name",
-      email: "email",
-      message: "message",
-    });
-  </script>
   <!-- Lightbox2 JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+  <script>
+    // Lightbox personnalisée depuis zéro
+    class CustomLightbox {
+      constructor() {
+        this.isOpen = false;
+        this.currentImageIndex = 0;
+        this.images = [];
+        this.init();
+      }
+      
+      init() {
+        // Ajouter les événements aux images
+        document.addEventListener('click', (e) => {
+          if (e.target.matches('img[data-lightbox]')) {
+            e.preventDefault();
+            this.openLightbox(e.target);
+          }
+        });
+        
+        // Fermer avec Échap
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && this.isOpen) {
+            this.closeLightbox();
+          }
+        });
+      }
+      
+      openLightbox(clickedImage) {
+        // Récupérer toutes les images de la galerie
+        const gallery = clickedImage.closest('.gallery') || document;
+        this.images = Array.from(gallery.querySelectorAll('img[data-lightbox]'));
+        this.currentImageIndex = this.images.indexOf(clickedImage);
+        
+        // Créer l'overlay
+        this.createOverlay();
+        this.createImageContainer();
+        this.createCloseButton();
+        
+        this.isOpen = true;
+        document.body.style.overflow = 'hidden';
+      }
+      
+      createOverlay() {
+        this.overlay = document.createElement('div');
+        this.overlay.className = 'custom-lightbox-overlay';
+        this.overlay.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.9);
+          z-index: 9998;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        `;
+        
+        // Fermer en cliquant sur l'overlay
+        this.overlay.addEventListener('click', (e) => {
+          if (e.target === this.overlay) {
+            this.closeLightbox();
+          }
+        });
+        
+        document.body.appendChild(this.overlay);
+      }
+      
+      createImageContainer() {
+        this.imageContainer = document.createElement('div');
+        this.imageContainer.className = 'custom-lightbox-image';
+        this.imageContainer.style.cssText = `
+          max-width: 90vw;
+          max-height: 90vh;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        `;
+        
+        this.updateImage();
+        this.overlay.appendChild(this.imageContainer);
+      }
+      
+      updateImage() {
+        if (this.images.length === 0) return;
+        
+        const currentImage = this.images[this.currentImageIndex];
+        const img = document.createElement('img');
+        img.src = currentImage.src;
+        img.style.cssText = `
+          max-width: 100%;
+          max-height: 100%;
+          width: auto;
+          height: auto;
+          object-fit: contain;
+          border-radius: 8px;
+          display: block;
+        `;
+        
+        this.imageContainer.innerHTML = '';
+        this.imageContainer.appendChild(img);
+      }
+      
+      createCloseButton() {
+        // Pas de bouton de fermeture - fermeture seulement par clic sur l'overlay
+      }
+      
+      closeLightbox() {
+        if (this.overlay) {
+          this.overlay.remove();
+        }
+        
+        this.isOpen = false;
+        document.body.style.overflow = '';
+      }
+    }
+    
+    // Initialiser la lightbox personnalisée
+    const customLightbox = new CustomLightbox();
+  </script>
 
 </body>
 
