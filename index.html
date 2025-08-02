@@ -21,9 +21,6 @@
   <link rel="stylesheet" href="assets/css/owl.css">
   <link rel="stylesheet" href="assets/css/lightbox.css">
 
-  <!-- Lightbox2 CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
-
   <!-- Mobile Responsive CSS -->
   <link rel="stylesheet" href="assets/css/mobile-responsive.css">
 
@@ -401,7 +398,7 @@
             <img src="assets/images/courses-10.jpg" width="240" height="240" alt="">
             <div class="down-content">
               <h4>Suivi pédagogique personnalisé</h4>
-              <p>UUn accompagnement pédagogique individualisé, régulier et adapté, permettant d’identifier les besoins
+              <p>Un accompagnement pédagogique individualisé, régulier et adapté, permettant d’identifier les besoins
                 de chaque élève et de l’aider à progresser à son rythme.</p>
             </div>
           </div>
@@ -533,7 +530,6 @@
 
   <script src="assets/js/isotope.min.js"></script>
   <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/lightbox.js"></script>
   <script src="assets/js/tabs.js"></script>
   <script src="assets/js/video.js"></script>
   <script src="assets/js/slick-slider.js"></script>
@@ -628,128 +624,7 @@
         });
     });
   </script>
-  <!-- Lightbox2 JS -->
-  <script>
-    // Lightbox personnalisée depuis zéro
-    class CustomLightbox {
-      constructor() {
-        this.isOpen = false;
-        this.currentImageIndex = 0;
-        this.images = [];
-        this.init();
-      }
-      
-      init() {
-        // Ajouter les événements aux images
-        document.addEventListener('click', (e) => {
-          if (e.target.matches('img[data-lightbox]')) {
-            e.preventDefault();
-            this.openLightbox(e.target);
-          }
-        });
-        
-        // Fermer avec Échap
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && this.isOpen) {
-            this.closeLightbox();
-          }
-        });
-      }
-      
-      openLightbox(clickedImage) {
-        // Récupérer toutes les images de la galerie
-        const gallery = clickedImage.closest('.gallery') || document;
-        this.images = Array.from(gallery.querySelectorAll('img[data-lightbox]'));
-        this.currentImageIndex = this.images.indexOf(clickedImage);
-        
-        // Créer l'overlay
-        this.createOverlay();
-        this.createImageContainer();
-        this.createCloseButton();
-        
-        this.isOpen = true;
-        document.body.style.overflow = 'hidden';
-      }
-      
-      createOverlay() {
-        this.overlay = document.createElement('div');
-        this.overlay.className = 'custom-lightbox-overlay';
-        this.overlay.style.cssText = `
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0, 0, 0, 0.9);
-          z-index: 9998;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        `;
-        
-        // Fermer en cliquant sur l'overlay
-        this.overlay.addEventListener('click', (e) => {
-          if (e.target === this.overlay) {
-            this.closeLightbox();
-          }
-        });
-        
-        document.body.appendChild(this.overlay);
-      }
-      
-      createImageContainer() {
-        this.imageContainer = document.createElement('div');
-        this.imageContainer.className = 'custom-lightbox-image';
-        this.imageContainer.style.cssText = `
-          max-width: 90vw;
-          max-height: 90vh;
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        `;
-        
-        this.updateImage();
-        this.overlay.appendChild(this.imageContainer);
-      }
-      
-      updateImage() {
-        if (this.images.length === 0) return;
-        
-        const currentImage = this.images[this.currentImageIndex];
-        const img = document.createElement('img');
-        img.src = currentImage.src;
-        img.style.cssText = `
-          max-width: 100%;
-          max-height: 100%;
-          width: auto;
-          height: auto;
-          object-fit: contain;
-          border-radius: 8px;
-          display: block;
-        `;
-        
-        this.imageContainer.innerHTML = '';
-        this.imageContainer.appendChild(img);
-      }
-      
-      createCloseButton() {
-        // Pas de bouton de fermeture - fermeture seulement par clic sur l'overlay
-      }
-      
-      closeLightbox() {
-        if (this.overlay) {
-          this.overlay.remove();
-        }
-        
-        this.isOpen = false;
-        document.body.style.overflow = '';
-      }
-    }
-    
-    // Initialiser la lightbox personnalisée
-    const customLightbox = new CustomLightbox();
-  </script>
+
 
 </body>
 

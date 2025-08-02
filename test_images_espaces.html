@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Images Section Nos Espaces</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #0c1228;
+            color: #fff;
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .test-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .test-title {
+            color: #ef7319;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .image-item {
+            background: rgba(245, 166, 35, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .image-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .image-item p {
+            margin: 0;
+            font-size: 14px;
+            color: #ccc;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 5px;
+        }
+        
+        .status-success {
+            background: #28a745;
+            color: #fff;
+        }
+        
+        .status-error {
+            background: #dc3545;
+            color: #fff;
+        }
+        
+        .status-warning {
+            background: #ffc107;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 style="text-align: center; color: #ef7319; margin-bottom: 30px;">
+            🖼️ Test - Images Section Nos Espaces
+        </h1>
+        
+        <div class="test-section">
+            <h2 class="test-title">📋 Liste des Images</h2>
+            <p>Voici la liste des images qui devraient être présentes dans la section "Nos Espaces" :</p>
+            
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="assets/images/1.jpeg" alt="Image 1" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='❌ Image non trouvée'; this.nextElementSibling.className='status status-error';">
+                    <p class="status status-success">✅ Image 1</p>
+                </div>
+                <div class="image-item">
+                    <img src="assets/images/2.jpeg" alt="Image 2" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='❌ Image non trouvée'; this.nextElementSibling.className='status status-error';">
+                    <p class="status status-success">✅ Image 2</p>
+                </div>
+                <div class="image-item">
+                    <img src="assets/images/3.jpeg" alt="Image 3" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='❌ Image non trouvée'; this.nextElementSibling.className='status status-error';">
+                    <p class="status status-success">✅ Image 3</p>
+                </div>
+                <div class="image-item">
+                    <img src="assets/images/4.jpeg" alt="Image 4" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='❌ Image non trouvée'; this.nextElementSibling.className='status status-error';">
+                    <p class="status status-success">✅ Image 4</p>
+                </div>
+                <div class="image-item">
+                    <img src="assets/images/5.jpeg" alt="Image 5" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='❌ Image non trouvée'; this.nextElementSibling.className='status status-error';">
+                    <p class="status status-success">✅ Image 5</p>
+                </div>
+                <div class="image-item">
+                    <img src="assets/images/6.jpeg" alt="Image 6" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='❌ Image non trouvée'; this.nextElementSibling.className='status status-error';">
+                    <p class="status status-success">✅ Image 6</p>
+                </div>
+                <div class="image-item">
+                    <img src="assets/images/7.jpeg" alt="Image 7" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='❌ Image non trouvée'; this.nextElementSibling.className='status status-error';">
+                    <p class="status status-success">✅ Image 7</p>
+                </div>
+                <div class="image-item">
+                    <img src="assets/images/8.jpeg" alt="Image 8" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='❌ Image non trouvée'; this.nextElementSibling.className='status status-error';">
+                    <p class="status status-success">✅ Image 8</p>
+                </div>
+                <div class="image-item">
+                    <img src="assets/images/9.jpeg" alt="Image 9" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='❌ Image non trouvée'; this.nextElementSibling.className='status status-error';">
+                    <p class="status status-success">✅ Image 9</p>
+                </div>
+                <div class="image-item">
+                    <img src="assets/images/10.jpeg" alt="Image 10" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='❌ Image non trouvée'; this.nextElementSibling.className='status status-error';">
+                    <p class="status status-success">✅ Image 10</p>
+                </div>
+                <div class="image-item">
+                    <img src="assets/images/11.jpeg" alt="Image 11" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='❌ Image non trouvée'; this.nextElementSibling.className='status status-error';">
+                    <p class="status status-success">✅ Image 11</p>
+                </div>
+                <div class="image-item">
+                    <img src="assets/images/12.jpeg" alt="Image 12" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='❌ Image non trouvée'; this.nextElementSibling.className='status status-error';">
+                    <p class="status status-success">✅ Image 12</p>
+                </div>
+                <div class="image-item">
+                    <img src="assets/images/13.jpeg" alt="Image 13" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='❌ Image non trouvée'; this.nextElementSibling.className='status status-error';">
+                    <p class="status status-success">✅ Image 13</p>
+                </div>
+                <div class="image-item">
+                    <img src="assets/images/14.jpeg" alt="Image 14" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='❌ Image non trouvée'; this.nextElementSibling.className='status status-error';">
+                    <p class="status status-success">✅ Image 14</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2 class="test-title">🔧 Instructions de Test</h2>
+            <p>Pour tester les images sur votre site :</p>
+            
+            <ol style="color: #ccc; line-height: 1.6;">
+                <li><strong>Ouvrez votre site</strong> dans un navigateur</li>
+                <li><strong>Naviguez</strong> vers la section "Nos Espaces"</li>
+                <li><strong>Vérifiez</strong> que les images hexagonales s'affichent</li>
+                <li><strong>Testez sur mobile</strong> en mode responsive</li>
+                <li><strong>Cliquez</strong> sur les images pour ouvrir la lightbox</li>
+            </ol>
+        </div>
+        
+        <div class="test-section">
+            <h2 class="test-title">🐛 Problèmes Courants</h2>
+            <ul style="color: #ccc; line-height: 1.6;">
+                <li><strong>Images invisibles :</strong> Problème de CSS avec <code>visibility: hidden</code></li>
+                <li><strong>Images manquantes :</strong> Fichiers d'images non trouvés dans le dossier <code>assets/images/</code></li>
+                <li><strong>Grille cassée :</strong> Problème avec les styles responsive</li>
+                <li><strong>Lightbox ne fonctionne pas :</strong> JavaScript non chargé ou erreur</li>
+            </ul>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(245, 166, 35, 0.1); border-radius: 10px;">
+            <h3 style="color: #ef7319; margin-bottom: 10px;">✅ Test des Images</h3>
+            <p style="color: #ccc;">
+                Si toutes les images s'affichent en vert ci-dessus, elles devraient aussi s'afficher correctement dans votre site !
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Compteur d'images chargées
+        let loadedImages = 0;
+        let totalImages = 14;
+        
+        document.querySelectorAll('.image-item img').forEach(img => {
+            img.addEventListener('load', function() {
+                loadedImages++;
+                updateStatus();
+            });
+            
+            img.addEventListener('error', function() {
+                updateStatus();
+            });
+        });
+        
+        function updateStatus() {
+            const statusDiv = document.querySelector('.test-section:last-child p');
+            if (statusDiv) {
+                statusDiv.innerHTML = `Images chargées : ${loadedImages} / ${totalImages}`;
+            }
+        }
+        
+        // Vérification initiale
+        setTimeout(updateStatus, 1000);
+    </script>
+</body>
+</html> 

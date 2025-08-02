@@ -219,14 +219,7 @@ $(document).ready(function() {
         }, 300);
     });
 
-    // Handle lightbox on mobile
-    if (typeof lightbox !== 'undefined') {
-        lightbox.option({
-            'resizeDuration': 200,
-            'wrapAround': true,
-            'albumLabel': 'Image %1 of %2'
-        });
-    }
+
 
     // Add loading states for better UX
     $('form').on('submit', function() {
@@ -413,7 +406,7 @@ $(document).ready(function() {
             'Activités': 'Loisirs',
             'Laboratoire': 'Sciences',
             'Transport': 'Logistique',
-            'Premiers soins': 'Santé',
+            'Espace de premiers soins': 'Santé',
             'Communication': 'Contact',
             'Suivi': 'Pédagogie',
             'Accompagnement': 'Orientation'
@@ -954,6 +947,423 @@ $(document).ready(function() {
         fixVideoBackground();
         console.log('✅ All enhancements initialized');
     }
+
+    // ===== SECTION NOS ESPACES - AMÉLIORATIONS MOBILE SEULEMENT =====
+    
+    // Enhancements for the hexagonal gallery section - MOBILE ONLY
+    function enhanceHexagonalGallery() {
+        // Only apply enhancements on mobile devices
+        if (window.innerWidth > 768) {
+            return; // Exit if not mobile
+        }
+
+        console.log('🏗️ Enhancing hexagonal gallery for mobile');
+
+        const hexGrid = document.getElementById('hexGrid');
+        if (!hexGrid) {
+            console.log('⚠️ Hex grid not found');
+            return;
+        }
+
+        // Add loading states for images and zoom icons
+        const hexImages = document.querySelectorAll('.hex .img');
+        hexImages.forEach((img, index) => {
+            // Add loading indicator
+            const loadingIndicator = document.createElement('div');
+            loadingIndicator.className = 'loading-indicator';
+            loadingIndicator.innerHTML = '<div class="spinner"></div>';
+            img.parentElement.appendChild(loadingIndicator);
+
+            // Add shine effect
+            const shine = document.createElement('div');
+            shine.className = 'shine';
+            img.parentElement.appendChild(shine);
+
+            // Add overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'overlay';
+            img.parentElement.appendChild(overlay);
+
+            // Add zoom icon
+            const zoomIcon = document.createElement('div');
+            zoomIcon.className = 'zoom-icon';
+            zoomIcon.textContent = '🔍';
+            img.parentElement.appendChild(zoomIcon);
+
+            // Remove loading indicator when image is loaded
+            const backgroundImage = img.style.backgroundImage;
+            if (backgroundImage) {
+                const imageUrl = backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+                const tempImg = new Image();
+                tempImg.onload = function() {
+                    if (loadingIndicator.parentNode) {
+                        loadingIndicator.parentNode.removeChild(loadingIndicator);
+                    }
+                    img.style.opacity = '1';
+                };
+                tempImg.onerror = function() {
+                    if (loadingIndicator.parentNode) {
+                        loadingIndicator.parentNode.removeChild(loadingIndicator);
+                    }
+                    console.log('❌ Failed to load image:', imageUrl);
+                };
+                tempImg.src = imageUrl;
+            }
+        });
+
+        // Add scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    const hexes = entry.target.querySelectorAll('.hex');
+                    hexes.forEach((hex, hexIndex) => {
+                        setTimeout(() => {
+                            hex.style.animation = `fadeInUp 0.6s ease-out ${hexIndex * 0.1}s both`;
+                        }, hexIndex * 100);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const comingSoonSection = document.querySelector('section.coming-soon');
+        if (comingSoonSection) {
+            observer.observe(comingSoonSection);
+        }
+
+        // Enhance lightbox functionality for mobile
+        enhanceMobileLightbox();
+
+        // Add touch gestures for better mobile experience
+        addTouchGestures();
+
+        // Add accessibility improvements
+        addAccessibilityFeatures();
+    }
+
+    // Enhanced mobile lightbox
+    function enhanceMobileLightbox() {
+        const hexLinks = document.querySelectorAll('.hexLink');
+        
+        hexLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const imageUrl = this.getAttribute('href');
+                const currentImage = this.querySelector('.img');
+                const backgroundImage = currentImage.style.backgroundImage;
+                const actualImageUrl = backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+                
+                showEnhancedLightbox(actualImageUrl, imageUrl);
+            });
+        });
+    }
+
+    // Show enhanced lightbox with navigation
+    function showEnhancedLightbox(imageUrl, originalUrl) {
+        // Get all images in the gallery
+        const allImages = Array.from(document.querySelectorAll('.hexLink')).map(link => {
+            const img = link.querySelector('.img');
+            const backgroundImage = img.style.backgroundImage;
+            return backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+        });
+
+        const currentIndex = allImages.indexOf(imageUrl);
+        
+        const lightbox = document.createElement('div');
+        lightbox.className = 'custom-lightbox-overlay';
+        lightbox.innerHTML = `
+            <div class="custom-lightbox-image">
+                <img src="${imageUrl}" alt="Galerie image" style="opacity: 0;">
+            </div>
+            <button class="custom-lightbox-close">&times;</button>
+            <div class="custom-lightbox-nav">
+                <button class="nav-prev" ${currentIndex === 0 ? 'disabled' : ''}>‹</button>
+                <span class="image-counter">${currentIndex + 1} / ${allImages.length}</span>
+                <button class="nav-next" ${currentIndex === allImages.length - 1 ? 'disabled' : ''}>›</button>
+            </div>
+        `;
+
+        document.body.appendChild(lightbox);
+        
+        // Ensure the image loads and becomes visible
+        const img = lightbox.querySelector('img');
+        img.onload = function() {
+            img.style.opacity = '1';
+        };
+        img.onerror = function() {
+            console.error('Failed to load image:', imageUrl);
+            img.style.opacity = '1'; // Show anyway
+        };
+
+        // Navigation functionality
+        let currentImageIndex = currentIndex;
+        
+        function updateImage(index) {
+            if (index >= 0 && index < allImages.length) {
+                currentImageIndex = index;
+                const img = lightbox.querySelector('img');
+                const counter = lightbox.querySelector('.image-counter');
+                const prevBtn = lightbox.querySelector('.nav-prev');
+                const nextBtn = lightbox.querySelector('.nav-next');
+                
+                // Add loading state
+                img.style.opacity = '0.5';
+                
+                // Set up load handlers
+                img.onload = function() {
+                    img.style.opacity = '1';
+                };
+                
+                img.onerror = function() {
+                    console.error('Failed to load image:', allImages[index]);
+                    img.style.opacity = '1'; // Show anyway
+                };
+                
+                // Update image source
+                img.src = allImages[index];
+                counter.textContent = `${index + 1} / ${allImages.length}`;
+                
+                // Update button states
+                prevBtn.disabled = index === 0;
+                nextBtn.disabled = index === allImages.length - 1;
+            }
+        }
+
+        // Event listeners for navigation
+        lightbox.querySelector('.nav-prev').addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (currentImageIndex > 0) {
+                updateImage(currentImageIndex - 1);
+            }
+        });
+
+        lightbox.querySelector('.nav-next').addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (currentImageIndex < allImages.length - 1) {
+                updateImage(currentImageIndex + 1);
+            }
+        });
+
+        // Close lightbox function - DEFINED FIRST
+        const closeLightbox = () => {
+            // Remove all event listeners
+            document.removeEventListener('keydown', handleKeydown);
+            
+            // Remove from DOM immediately
+            if (lightbox.parentNode) {
+                lightbox.parentNode.removeChild(lightbox);
+            }
+        };
+
+        // Keyboard navigation
+        const handleKeydown = function(e) {
+            if (lightbox.parentNode) {
+                switch(e.key) {
+                    case 'Escape':
+                        e.preventDefault();
+                        closeLightbox();
+                        break;
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        if (currentImageIndex > 0) {
+                            updateImage(currentImageIndex - 1);
+                        }
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        if (currentImageIndex < allImages.length - 1) {
+                            updateImage(currentImageIndex + 1);
+                        }
+                        break;
+                }
+            }
+        };
+        
+        document.addEventListener('keydown', handleKeydown);
+
+        // Close button event listener - ULTRA SIMPLE
+        const closeButton = lightbox.querySelector('.custom-lightbox-close');
+        
+        // Use the same closeLightbox function for consistency
+        closeButton.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeLightbox();
+        };
+        
+        // Background click event listener - ULTRA SIMPLE
+        lightbox.onclick = function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        };
+
+        // Swipe gestures for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        lightbox.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        lightbox.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentImageIndex < allImages.length - 1) {
+                    // Swipe left - next image
+                    updateImage(currentImageIndex + 1);
+                } else if (diff < 0 && currentImageIndex > 0) {
+                    // Swipe right - previous image
+                    updateImage(currentImageIndex - 1);
+                }
+            }
+        }
+    }
+
+    // Add touch gestures for better mobile experience
+    function addTouchGestures() {
+        const hexes = document.querySelectorAll('.hex');
+        
+        hexes.forEach(hex => {
+            let touchStartY = 0;
+            let touchEndY = 0;
+
+            hex.addEventListener('touchstart', function(e) {
+                touchStartY = e.changedTouches[0].screenY;
+            });
+
+            hex.addEventListener('touchend', function(e) {
+                touchEndY = e.changedTouches[0].screenY;
+                handleHexSwipe();
+            });
+
+            function handleHexSwipe() {
+                const swipeThreshold = 30;
+                const diff = touchStartY - touchEndY;
+
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        // Swipe up - add visual feedback
+                        hex.style.transform = 'translateY(-4px) scale(1.02)';
+                        setTimeout(() => {
+                            hex.style.transform = '';
+                        }, 200);
+                    }
+                }
+            }
+        });
+    }
+
+    // Add accessibility features
+    function addAccessibilityFeatures() {
+        const hexLinks = document.querySelectorAll('.hexLink');
+        
+        hexLinks.forEach((link, index) => {
+            // Add ARIA labels
+            link.setAttribute('aria-label', `Voir l'image ${index + 1} de la galerie`);
+            link.setAttribute('role', 'button');
+            link.setAttribute('tabindex', '0');
+            
+            // Add keyboard navigation
+            link.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+
+        // Add focus indicators
+        const style = document.createElement('style');
+        style.textContent = `
+            .hexLink:focus {
+                outline: 3px solid #ef7319;
+                outline-offset: 2px;
+            }
+            
+            .hexLink:focus .hexIn {
+                transform: translateY(-4px);
+                box-shadow: 0 8px 25px rgba(245, 166, 35, 0.4);
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // Add performance optimizations
+    function optimizePerformance() {
+        // Lazy load images for better performance
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const backgroundImage = img.style.backgroundImage;
+                        if (backgroundImage) {
+                            const imageUrl = backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+                            // Preload the image
+                            const tempImg = new Image();
+                            tempImg.src = imageUrl;
+                        }
+                        imageObserver.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px'
+            });
+
+            document.querySelectorAll('.hex .img').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // Debounce scroll events
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+            scrollTimeout = setTimeout(function() {
+                // Handle scroll-based animations here
+            }, 16); // ~60fps
+        });
+    }
+
+    // Initialize hexagonal gallery enhancements
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            enhanceHexagonalGallery();
+            optimizePerformance();
+        });
+    } else {
+        enhanceHexagonalGallery();
+        optimizePerformance();
+    }
+
+    // Also initialize if jQuery is ready
+    if (typeof $ !== 'undefined') {
+        $(document).ready(function() {
+            enhanceHexagonalGallery();
+            optimizePerformance();
+        });
+    }
+
+    console.log('✅ Hexagonal gallery enhancements loaded');
 
 
 }); 
